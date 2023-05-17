@@ -1,18 +1,25 @@
 <script setup lang="ts">
+import { onMounted } from 'vue'
 import { RouterLink, RouterView } from 'vue-router'
 import HelloWorld from './components/HelloWorld.vue'
+import { useUsersStore } from './stores/uesersStore'
+const userStore = useUsersStore()
+onMounted(() => {
+  userStore.loadUsersData()
+})
 </script>
 
 <template>
   <header>
     <img alt="Vue logo" class="logo" src="@/assets/logo.svg" width="125" height="125" />
-
+    {{ userStore.list }}
     <div class="wrapper">
       <HelloWorld msg="You did it!" />
-
+      <v-btn> Button </v-btn>
       <nav>
         <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
+        <RouterLink to="/about">Filter</RouterLink>
+        <RouterLink to="/change">Change</RouterLink>
       </nav>
     </div>
   </header>
